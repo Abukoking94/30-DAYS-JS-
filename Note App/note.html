@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="note.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1 class="header"><i class='bx bx-book-open'></i>Notes</h1>
+        <button class="create-btn"> Create Notes</button>
+
+        <div class="note-container">
+            <textarea class="text-box"></textarea>
+            <textarea class="text-box"></textarea>
+            <textarea class="text-box"></textarea>
+        </div>
+    </div>
+
+    <script>
+        let creatBtn = document.querySelector(".create-btn");
+        let noteContainer = document.querySelector(".note-container");
+
+        creatBtn.addEventListener("click", function(){
+             const newText = document.createElement('textarea');
+            newText.classList.add('text-box')
+            noteContainer.appendChild(newText);
+        })
+    </script>
+</body>
+
+</html>

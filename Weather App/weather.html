@@ -7,7 +7,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Weather App</title>
     <link rel="stylesheet" href="weather.css">
-    <script src="weather.js"></script>
+
 </head>
 
 <body>
@@ -16,15 +16,18 @@
 
         <div class="nav-bar">
             <input class="search-bar" type="text" placeholder="Enter City name">
-            <section class="search-btn">
+            <section class="search-btn" onclick="getWeadtherData()" on>
                 <i class='bx bx-search-alt-2'></i>
             </section>
         </div>
 
+        <div class="date-no">
+
+        </div>
         <div class="main-content">
-            <i class='bx bxs-sun logos'> </i>
-            <p class="degree">75° C</p>
-            <p class="country-name">New York </p>
+            <img alt="" class="logos" style="width: 200px; height:200px; border:solid transparent 1px;">
+            <p class="degree-no"></p>
+            <p class="country-name"> </p>
         </div>
 
         <div class="footer">
@@ -32,16 +35,15 @@
             <section class="humidity">
                 <img class="humidity-img" src="weather.png" alt="">
                 <section class="h-section">
-                    <p class="humidity-no">48%</p>
+                    <p class="humidity-no"></p>
                     <p class="humidity-word">Humidity</p>
                 </section>
             </section>
 
             <section class="speed">
                 <img class="speed-img" src="wind.png" alt="">
-
                 <section class="s-section">
-                    <p class="speed-no">10.29 km/h</p>
+                    <p class="speed-no"></p>
                     <p class="speed-word">Wind Speed</p>
                 </section>
             </section>
@@ -49,5 +51,61 @@
     </div>
 
 </body>
+<script>
+
+
+    let apiKey = "3f1d3eb6b746a5e51ce9f62400d1a005";
+
+    let dateNo = document.querySelector('.date-no');
+    let imglogo = document.querySelector(".logos");
+    let degreeNo = document.querySelector(".degree-no");
+    let countryName = document.querySelector(".country-name");
+    let humidityNo = document.querySelector(".humidity-no");
+    let speedNo = document.querySelector(".speed-no");
+
+    let months = ["January", "Fabruary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    let dateObj = new Date();
+    let month = months[dateObj.getUTCMonth()];
+    let day = dateObj.getUTCDate() - 1;
+    let year = dateObj.getUTCFullYear();
+
+    dateNo.innerHTML = `<p class= "date-class">${month} ${day} ,${year}</p> `
+
+    const getWeadtherData = async () => {
+
+        try {
+            let searchBar = document.querySelector('.search-bar').value;
+
+            const weatherDataFetch = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchBar}&APPID=3f1d3eb6b746a5e51ce9f62400d1a005`,
+                {
+                    headers: {
+                        Accept: "application/json"
+                    }
+
+                });
+            const weatherData = await weatherDataFetch.json();
+
+            degreeNo.innerHTML = `${Math.round(weatherData.main.temp - 273)} C°`;
+            countryName.innerHTML = `${weatherData.sys['country']}`;
+            humidityNo.innerHTML = `${weatherData.main.humidity}`;
+            speedNo.innerHTML = `${weatherData.wind.speed} Km/hr`;
+            imglogo.setAttribute('src', `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`);
+        }
+
+        catch (error) {
+            degreeNo.innerHTML = 'nill'
+            console.log(error);
+
+        }
+    }
+
+
+
+    let searchBtn = document.querySelector('.search-btn');
+
+
+
+</script>
 
 </html>

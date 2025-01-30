@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <!-- <input type="text">
+        <input type="submit"> -->
+
+    </form>
+    <h1 class="header"> hello</h1>
+    <!-- 
+    <button data-color="red">red</button>
+    <button data-color="blue">blue</button>
+    <button data-color="orange">orange</button> -->
+
+    <select id="option">
+        <option value="red"> red</option>
+        <option value="orange"> orange</option>
+        <option value="blue"> blue</option>
+        <option value="green"> green</option>
+        <option value="yellow"> yellow</option>
+    </select>
+
+
+    <script>
+
+        document.querySelector("#option").onchange = function ()  {
+            document.querySelector(".header").style.color = this.value;
+            console.log(this)
+        }
+
+
+        /* let btn = document.querySelector("input[type='submit']")
+         btn.addEventListener('click', function () {
+             let val = document.querySelector("input[type='text']")
+             alert(`hello ${val.value}`)
+             })*/
+
+        /*        document.addEventListener("DOMContentLoaded", function () {
+        
+        
+                    let btn = document.querySelectorAll('button');
+                    btn.forEach(function (button) {
+                        button.onclick = function () {
+                            document.querySelector('.header').style.color = this.dataset.color;
+        
+                        }
+                    }
+                    )
+                })
+        */
+
+
+
+
+
+    </script>
+</body>
+
+
+
+</html>
